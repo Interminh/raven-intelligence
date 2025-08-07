@@ -22,7 +22,7 @@
             <div class = "top">Look forward to Look Within</div>
             <div class = "middle">The only assistant you'll ever need.</div>
             <div class = "bottom"><button>Look Within</button></div>
-            <div class = "arrow"><div>How it works</div><div>&#9660</div></div>
+            <div class = "arrow"><div></div><div></div></div>
         </div>
 
     <!-- Section above should theoretically take up whole landing screen of whatever device -->
@@ -52,6 +52,50 @@
         </div>
      </div>
 
+     <div class = "reveal">
+        <div class = "top">
+            <div class = "title">Introducing Raven</div>
+            <div class = "line">The Ultimate Personal Assistant.</div>
+        </div>
+        <div class="carousel-container">
+            <div class="carousel-arrow left" onclick="previousSlide()">&#8249;</div>
+            
+            <div class="mid-content">
+                <div class="mid1 active">
+                    <div>
+                        <div class = "photo"></div>
+                        <div class = "text">Feels like magic. Wears like nothing.</div>
+                    </div>
+                </div>
+                <div class="mid2">
+                    <div>
+                         <div class = "photo"></div>
+                         <div class = "text">See the world through Raven.</div>
+                    </div>
+                </div>
+                <div class="mid3">
+                    <div>
+                        <div class = "photo"></div>
+                        <div class = "text">One of thousand. Built to remember.</div>
+                    </div>
+                </div>
+                <div class="mid4">
+                    <div>
+                        <div class = "photo"></div>
+                        <div class = "text">Innovation in every curve.</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-arrow right" onclick="nextSlide()">&#8250;</div>
+        </div>
+        <div class = "bottom">
+            <div class = "button"><button>What's Inside</button></div>
+        </div>
+     </div>
+
+
+
     <!-- The Introduction Section of the Website -->
      <div class = "intro">
         <div class = "meet">
@@ -72,8 +116,35 @@
                 <div class = "text">Raven notices what you might miss and steps in before you ask. It reminds you of what matters exactly when you need it.</div>
             </div>
         </div>
-        <div class = "arrow"><div>Go deeper</div><div>&#9660</div></div>
      </div>
+
+<script>
+let currentSlide = 0;
+const slides = ['mid1', 'mid2', 'mid3', 'mid4'];
+
+function showSlide(index) {
+    // Hide all slides
+    slides.forEach(slide => {
+        document.querySelector(`.${slide}`).classList.remove('active');
+    });
+    
+    // Show current slide
+    document.querySelector(`.${slides[index]}`).classList.add('active');
+}
+
+function nextSlide() {
+    currentSlide = (currentSlide + 1) % slides.length;
+    showSlide(currentSlide);
+}
+
+function previousSlide() {
+    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
+    showSlide(currentSlide);
+}
+
+//Auto advances every 5 seconds
+setInterval(nextSlide, 5000);
+</script>
 
 </body>
 
