@@ -1,3 +1,4 @@
 !Try to use more descriptive comments and remember to always git push/pull!
 -Make sure to incorporate flexibility to different display sizes
 -Add all widgets like text appear softly and slowly over time at the end of structure and coloring
+-Add color gradient and borders around divs

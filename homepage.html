@@ -52,6 +52,7 @@
         </div>
      </div>
 
+     <!-- The reveal and product showcase part of the website -->
      <div class = "reveal">
         <div class = "top">
             <div class = "title">Introducing Raven</div>
@@ -63,26 +64,26 @@
             <div class="mid-content">
                 <div class="mid1 active">
                     <div>
-                        <div class = "photo"><img href = "images/raven-3.jpg" ></div>
-                        <div class = "text">Feels like magic. Wears like nothing.</div>
+                        <div class = "photo"><img src = "images/raven-3.png" alt = "The front-view of Raven's Founder Edition model."></div>
+                        <div class = "text">Looks like nothing. Changes everything.</div>
                     </div>
                 </div>
                 <div class="mid2">
                     <div>
-                         <div class = "photo"></div>
-                         <div class = "text">See the world through Raven.</div>
+                         <div class = "photo"><img src = "images/raven-1.png" alt = "The back-view of Raven's Founder Edition model."></div>
+                         <div class = "text">You don't see Raven. You see through it.</div>
                     </div>
                 </div>
                 <div class="mid3">
                     <div>
-                        <div class = "photo"></div>
-                        <div class = "text">One of thousand. Built to remember.</div>
+                        <div class = "photo"><img src = "images/raven-4.png" alt = "A close up view of the personalized serial number on the product."></div>
+                        <div class = "text">One of one thousand. Made to be remembered.</div>
                     </div>
                 </div>
                 <div class="mid4">
                     <div>
-                        <div class = "photo"></div>
-                        <div class = "text">Innovation in every curve.</div>
+                        <div class = "photo"><img src = "images/raven-2.png" alt = "A view of the limited etching included on Raven FE."></div>
+                        <div class = "text">Founder's Edition. Yours alone.</div>
                     </div>
                 </div>
             </div>
@@ -96,25 +97,47 @@
 
 
 
-    <!-- The Introduction Section of the Website -->
+    <!-- The Introduction Section of the Website with aux info -->
      <div class = "intro">
         <div class = "meet">
-            <div class = "meet1">Meet Raven</div>
-            <div class = "meet2">A new kind of intelligence, built just for you.</div>
+            <div class = "meet1">Powered by Raven Engine</div>
+            <div class = "meet2">Superintelligence that fits on your phone.</div>
         </div>
         <div class = "table">
-            <div class = "box">
-                <div class = "sec">Remembers You</div>
-                <div class = "text">Raven keeps track of what you've said, where you've been, and what matters to you. It works quietly in the background to help you recall anything, anytime.</div>
+            <div class = "box" onclick="toggleBox(this)">
+                <div class = "sec">
+                    <div>Remembers You</div>
+                    <div>+</div>
+                </div>
+                <div class = "text">
+                    <div><strong>The most personal assistant ever made.</strong></div>
+                    <div>Raven listens to, and remembers what you say, and uses it to answer your questions like a second brain.</div>
+                </div>
             </div>
-            <div class = "box">
-                <div class = "sec">Knows Your World</div>
-                <div class = "text">Stay updated with live information about the world around you. From traffic to weather to news, Raven brings the facts to you when they're actually useful.</div>
+            <div class = "box" onclick="toggleBox(this)">
+                <div class = "sec">
+                    <div>Knows Your World</div>
+                    <div>+</div>
+                </div>
+                <div class = "text">
+                    <div><strong>Raven understands the world around you.</strong></div>
+                    <div>Whether it's a question about your pet, favorite resturant, or your city, Raven responds instantly, with real-world knowledge tailored to you.</div>
+                </div>
             </div>
-            <div class = "box">
-                <div class = "sec">Thinks Ahead</div>
-                <div class = "text">Raven notices what you might miss and steps in before you ask. It reminds you of what matters exactly when you need it.</div>
+            <div class = "box" onclick="toggleBox(this)">
+                <div class = "sec">
+                    <div>Thinks Ahead</div>
+                    <div>+</div>
+                </div>
+                <div class = "text">
+                    <div><strong>Raven is the only assistant that helps you before you even ask.</strong></div>
+                    <div>No more worrying about forgetting your umbrella. Raven's got you.</div>
+                </div>
             </div>
+        </div>
+        <div class = "bottom">
+            <div class = "text">Local by default. Private by design.</div>
+            <button>Beginnings</button>
         </div>
      </div>
 
@@ -144,6 +167,11 @@ function previousSlide() {
 
 //Auto advances every 5 seconds
 setInterval(nextSlide, 5000);
+
+// Function to toggle box expansion
+function toggleBox(box) {
+    box.classList.toggle('expanded');
+}
 </script>
 
 </body>
