@@ -58,37 +58,37 @@
             <div class = "title">Introducing Raven</div>
             <div class = "line">The Ultimate Personal Assistant.</div>
         </div>
-        <div class="carousel-container">
-            <div class="carousel-arrow left" onclick="previousSlide()">&#8249;</div>
+        <div class="carousel-container" data-carousel="reveal">
+            <div class="carousel-arrow left" onclick="previousSlide('reveal')">&#8249;</div>
             
             <div class="mid-content">
-                <div class="mid1 active">
+                <div class="reveal-mid1 active">
                     <div>
                         <div class = "photo"><img src = "images/raven-3.png" alt = "The front-view of Raven's Founder Edition model."></div>
                         <div class = "text">Looks like nothing. Changes everything.</div>
                     </div>
                 </div>
-                <div class="mid2">
+                <div class="reveal-mid2">
                     <div>
                          <div class = "photo"><img src = "images/raven-1.png" alt = "The back-view of Raven's Founder Edition model."></div>
                          <div class = "text">You don't see Raven. You see through it.</div>
                     </div>
                 </div>
-                <div class="mid3">
+                <div class="reveal-mid3">
                     <div>
-                        <div class = "photo"><img src = "images/raven-4.png" alt = "A close up view of the personalized serial number on the product."></div>
+                        <div class = "photo"><img src = "images/raven-2.png" alt = "A close up view of the personalized serial number on the product."></div>
                         <div class = "text">One of one thousand. Made to be remembered.</div>
                     </div>
                 </div>
-                <div class="mid4">
+                <div class="reveal-mid4">
                     <div>
-                        <div class = "photo"><img src = "images/raven-2.png" alt = "A view of the limited etching included on Raven FE."></div>
+                        <div class = "photo"><img src = "images/raven-4.png" alt = "A view of the limited etching included on Raven FE."></div>
                         <div class = "text">Founder's Edition. Yours alone.</div>
                     </div>
                 </div>
             </div>
             
-            <div class="carousel-arrow right" onclick="nextSlide()">&#8250;</div>
+            <div class="carousel-arrow right" onclick="nextSlide('reveal')">&#8250;</div>
         </div>
         <div class = "bottom">
             <div class = "button"><button>What's Inside</button></div>
@@ -141,32 +141,87 @@
         </div>
      </div>
 
-<script>
-let currentSlide = 0;
-const slides = ['mid1', 'mid2', 'mid3', 'mid4'];
+     <!-- The beginnings section -->
+      <div class = "beginnings">
+        <div class = "interface">
+            <div class = "title">It all started with a question.</div>
+            <div class = "line">What if we could interface with thought itself?</div>
+        </div>
 
-function showSlide(index) {
-    // Hide all slides
-    slides.forEach(slide => {
+        <div class="carousel-container" data-carousel="beginnings">
+            <div class="carousel-arrow left" onclick="previousSlide('beginnings')">&#8249;</div>
+            
+            <div class="mid-content">
+                <div class="beginnings-mid1 active">
+                    <div>
+                        <div class = "photo"><img src = "images/beginning-1.png" alt = "The front-view of Raven's Founder Edition model."></div>
+                        <div class = "text">Rendering of Raven Intelligence "HQ", Bellevue, WA</div>
+                    </div>
+                </div>
+                <div class="beginnings-mid2">
+                    <div>
+                         <div class = "photo"><img src = "images/beginning-2.png" alt = "The back-view of Raven's Founder Edition model."></div>
+                         <div class = "text">Founder & CEO Siddarth at work on hardware</div>
+                    </div>
+                </div>
+                <div class="beginnings-mid3">
+                    <div>
+                        <div class = "photo"><img src = "images/beginning-3.png" alt = "A close up view of the personalized serial number on the product."></div>
+                        <div class = "text">Co-Founder Bradley Nick reviewing software</div>
+                    </div>
+                </div>
+                <div class="beginnings-mid4">
+                    <div>
+                        <div class = "photo"><img src = "images/beginning-4.png" alt = "A view of the limited etching included on Raven FE."></div>
+                        <div class = "text">Mapping the future of intelligence</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="carousel-arrow right" onclick="nextSlide('beginnings')">&#8250;</div>
+        </div>
+
+      </div>
+
+<script>
+// Carousel state for each section
+const carousels = {
+    reveal: {
+        currentSlide: 0,
+        slides: ['reveal-mid1', 'reveal-mid2', 'reveal-mid3', 'reveal-mid4']
+    },
+    beginnings: {
+        currentSlide: 0,
+        slides: ['beginnings-mid1', 'beginnings-mid2', 'beginnings-mid3', 'beginnings-mid4']
+    }
+};
+
+function showSlide(carouselName, index) {
+    const carousel = carousels[carouselName];
+    // Hide all slides for this carousel
+    carousel.slides.forEach(slide => {
         document.querySelector(`.${slide}`).classList.remove('active');
     });
     
     // Show current slide
-    document.querySelector(`.${slides[index]}`).classList.add('active');
+    document.querySelector(`.${carousel.slides[index]}`).classList.add('active');
 }
 
-function nextSlide() {
-    currentSlide = (currentSlide + 1) % slides.length;
-    showSlide(currentSlide);
+function nextSlide(carouselName) {
+    const carousel = carousels[carouselName];
+    carousel.currentSlide = (carousel.currentSlide + 1) % carousel.slides.length;
+    showSlide(carouselName, carousel.currentSlide);
 }
 
-function previousSlide() {
-    currentSlide = (currentSlide - 1 + slides.length) % slides.length;
-    showSlide(currentSlide);
+function previousSlide(carouselName) {
+    const carousel = carousels[carouselName];
+    carousel.currentSlide = (carousel.currentSlide - 1 + carousel.slides.length) % carousel.slides.length;
+    showSlide(carouselName, carousel.currentSlide);
 }
 
-//Auto advances every 5 seconds
-setInterval(nextSlide, 5000);
+// Auto advance each carousel every 5 seconds
+setInterval(() => nextSlide('reveal'), 5000);
+setInterval(() => nextSlide('beginnings'), 5000);
 
 // Function to toggle box expansion
 function toggleBox(box) {
