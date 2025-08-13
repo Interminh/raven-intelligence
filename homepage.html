@@ -21,7 +21,7 @@
         <div class = "hook">
             <div class = "top">The Future of You.</div>
             <div class = "middle">Raven, the only assistant that knows you better than you know yourself.</div>
-            <div class = "bottom"><button>Unlock Your Future</button></div>
+            <div class = "bottom"><button onclick="scrollToSection('info')">Unlock Your Future</button></div>
             <div class = "arrow"><div></div><div></div></div>
         </div>
 
@@ -29,7 +29,7 @@
     </div>
 
     <!-- The info part of the website-->
-     <div class = "info">
+     <div class = "info" id="info">
         <div class = "top">
             <div class = "title">The Next Leap Is You.</div>
             <div class = "under">Intelligence is about understanding who you are.</div>
@@ -44,12 +44,12 @@
                 <div>It's about remebering what matters and understanding who you are.</div>
             </div>
         <div class = "bottom">
-            <div class = "button"><button>Experience Raven</button></div>
+            <div class = "button"><button onclick="scrollToSection('reveal')">Experience Raven</button></div>
         </div>
      </div>
 
      <!-- The reveal and product showcase part of the website -->
-     <div class = "reveal">
+     <div class = "reveal" id="reveal">
         <div class = "top">
             <div class = "title">The Future is in Sight.</div>
         </div>
@@ -86,14 +86,14 @@
             <div class="carousel-arrow right" onclick="nextSlide('reveal')">&#8250;</div>
         </div>
         <div class = "bottom">
-            <div class = "button"><button>Discover the Difference</button></div>
+            <div class = "button"><button onclick="scrollToSection('intro')">Discover the Difference</button></div>
         </div>
      </div>
 
 
 
     <!-- The Introduction Section of the Website with aux info -->
-     <div class = "intro">
+     <div class = "intro" id="intro">
         <div class = "meet">
             <div class = "meet1">The Core of Your Potential.</div>
             <div class = "meet2">Explore your life, with a partner by your side.</div>
@@ -132,12 +132,12 @@
         </div>
         <div class = "bottom">
             <div class = "text">Local by default. Private by design.</div>
-            <button>Beginnings</button>
+            <button onclick="scrollToSection('beginnings')">Beginnings</button>
         </div>
      </div>
 
      <!-- The beginnings section -->
-      <div class = "beginnings">
+      <div class = "beginnings" id="beginnings">
         <div class = "interface">
             <div class = "title">It all started with a question.</div>
             <div class = "line">What if we could interface with thought itself?</div>
@@ -251,6 +251,21 @@ setInterval(() => nextSlide('beginnings'), 5000);
 // Function to toggle box expansion
 function toggleBox(box) {
     box.classList.toggle('expanded');
+}
+
+// Function to scroll to a section smoothly
+function scrollToSection(sectionId) {
+    const element = document.getElementById(sectionId);
+    if (element) {
+        // Use 'start' positioning for info and beginnings sections
+        // Use 'center' positioning for reveal and intro sections
+        const blockPosition = (sectionId === 'info' || sectionId === 'beginnings') ? 'start' : 'center';
+        
+        element.scrollIntoView({
+            behavior: 'smooth',
+            block: blockPosition
+        });
+    }
 }
 </script>
 
