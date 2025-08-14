@@ -538,6 +538,136 @@ a {
     text-align: center;
 }
 
+/* ============= SIDE MENU STYLES ============= */
+
+/* Make logo clickable */
+.logo {
+    cursor: pointer;
+    transition: transform 0.2s ease;
+}
+
+.logo:hover {
+    transform: scale(1.05);
+}
+
+/* Side menu container */
+.side-menu {
+    position: fixed;
+    top: 0;
+    left: -350px;
+    width: 350px;
+    height: 100vh;
+    background: linear-gradient(180deg, #000002 0%, #03061E 25%, #404257 50%, #03061E 75%, #000002 100%);
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+    transition: left 0.3s ease;
+    z-index: 1000;
+    overflow-y: auto;
+}
+
+.side-menu.open {
+    left: 0;
+}
+
+/* Side menu header */
+.side-menu-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+}
+
+.menu-logo {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+    color: #ffffff;
+}
+
+.menu-logo img {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+}
+
+.menu-logo span {
+    font-family: "Playfair Display", sans-serif;
+    font-size: 18px;
+    font-weight: 600;
+}
+
+.close-btn {
+    font-size: 30px;
+    color: #ffffff;
+    cursor: pointer;
+    padding: 5px 10px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+}
+
+.close-btn:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Side menu navigation */
+.side-menu-nav {
+    padding: 30px 0;
+}
+
+.side-menu-nav a {
+    display: block;
+    padding: 15px 25px;
+    color: #ffffff;
+    text-decoration: none;
+    font-family: "Montserrat", sans-serif;
+    font-size: 16px;
+    font-weight: 500;
+    border-left: 3px solid transparent;
+    transition: all 0.3s ease;
+    position: relative;
+}
+
+.side-menu-nav a:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+    border-left-color: #ffffff;
+    padding-left: 35px;
+    transform: translateX(5px);
+}
+
+.side-menu-nav a::before {
+    content: '';
+    position: absolute;
+    left: 0;
+    top: 0;
+    width: 0;
+    height: 100%;
+    background: linear-gradient(90deg, rgba(255, 255, 255, 0.1), transparent);
+    transition: width 0.3s ease;
+}
+
+.side-menu-nav a:hover::before {
+    width: 100%;
+}
+
+/* Side menu overlay */
+.side-menu-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 999;
+}
+
+.side-menu-overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
 /* ============= RESPONSIVE DESIGN ============= */
 
 /* Tablet Styles (768px to 1024px) */

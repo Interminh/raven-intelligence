@@ -14,9 +14,9 @@
     <!-- The Header Section of the Website -->
     <div class = "header">
         <div class = "mainbar">
-            <div class = "logo"><img src = "./images/raven-logo.jpg" alt = "The premier logo of Raven Intelligence."></div>
+            <div class = "logo" onclick="toggleSideMenu()"><img src = "./images/raven-logo.jpg" alt = "The premier logo of Raven Intelligence."></div>
             <!-- Leads Patrons to the Email sign-up -->
-            <div class = "sign-up"><a href = "https://stats.sender.net/forms/ejRJNv/view">Sign Up</a></div>
+            <!-- <div class = "sign-up"><a href = "https://stats.sender.net/forms/ejRJNv/view">Sign Up</a></div> -->
         </div>
         <div class = "hook">
             <div class = "top">The Future of You.</div>
@@ -27,6 +27,28 @@
 
     <!-- Section above should theoretically take up whole landing screen of whatever device -->
     </div>
+
+    <!-- Side Menu -->
+    <div class="side-menu" id="sideMenu">
+        <div class="side-menu-header">
+            <div class="menu-logo">
+                <img src="./images/raven-logo.jpg" alt="Raven Intelligence">
+                <span>Raven Intelligence</span>
+            </div>
+            <div class="close-btn" onclick="toggleSideMenu()">&times;</div>
+        </div>
+        <nav class="side-menu-nav">
+            <a href="#info" onclick="closeSideMenuAndScroll('info')">About Raven</a>
+            <a href="#reveal" onclick="closeSideMenuAndScroll('reveal')">Features</a>
+            <a href="#intro" onclick="closeSideMenuAndScroll('intro')">How It Works</a>
+            <a href="#beginnings" onclick="closeSideMenuAndScroll('beginnings')">Our Story</a>
+            <a href="https://stats.sender.net/forms/ejRJNv/view" target="_blank">Join Waitlist</a>
+            <a href="#finale" onclick="closeSideMenuAndScroll('finale')">Contact</a>
+        </nav>
+    </div>
+
+    <!-- Overlay for side menu -->
+    <div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
 
     <!-- The info part of the website-->
      <div class = "info" id="info">
@@ -190,7 +212,7 @@
       </div>
 
       <!-- Finale Section of the Website -->
-       <div class = "finale">
+       <div class = "finale" id = "finale">
             <div class = "look">
                 <div class = "upper">Ready to Look Within?</div>
                 <div class = "upper-2">The future isn't within the stars. It's within you.</div>
@@ -346,6 +368,37 @@ function scrollToSection(sectionId) {
             block: blockPosition
         });
     }
+}
+
+// Side menu functions
+function toggleSideMenu() {
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('sideMenuOverlay');
+    
+    if (sideMenu.classList.contains('open')) {
+        sideMenu.classList.remove('open');
+        overlay.classList.remove('active');
+        document.body.style.overflow = 'auto'; // Re-enable scrolling
+    } else {
+        sideMenu.classList.add('open');
+        overlay.classList.add('active');
+        document.body.style.overflow = 'hidden'; // Disable scrolling
+    }
+}
+
+function closeSideMenuAndScroll(sectionId) {
+    // Close the side menu first
+    const sideMenu = document.getElementById('sideMenu');
+    const overlay = document.getElementById('sideMenuOverlay');
+    
+    sideMenu.classList.remove('open');
+    overlay.classList.remove('active');
+    document.body.style.overflow = 'auto';
+    
+    // Then scroll to the section after a brief delay
+    setTimeout(() => {
+        scrollToSection(sectionId);
+    }, 300);
 }
 </script>
 
