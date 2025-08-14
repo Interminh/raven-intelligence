@@ -538,9 +538,9 @@ a {
     text-align: center;
 }
 
-/* ============= SIDE MENU STYLES ============= */
+/* -----------------Side bar Styling --------------------------------*/
 
-/* Make logo clickable */
+
 .logo {
     cursor: pointer;
     transition: transform 0.2s ease;
@@ -550,7 +550,7 @@ a {
     transform: scale(1.05);
 }
 
-/* Side menu container */
+
 .side-menu {
     position: fixed;
     top: 0;
@@ -568,7 +568,7 @@ a {
     left: 0;
 }
 
-/* Side menu header */
+
 .side-menu-header {
     display: flex;
     justify-content: space-between;
@@ -609,7 +609,7 @@ a {
     background-color: rgba(255, 255, 255, 0.1);
 }
 
-/* Side menu navigation */
+
 .side-menu-nav {
     padding: 30px 0;
 }
@@ -649,7 +649,7 @@ a {
     width: 100%;
 }
 
-/* Side menu overlay */
+
 .side-menu-overlay {
     position: fixed;
     top: 0;
@@ -668,7 +668,7 @@ a {
     visibility: visible;
 }
 
-/* ============= RESPONSIVE DESIGN ============= */
+/* -------------------------RESPONSIVE DESIGN ------------------------ */
 
 /* Tablet Styles (768px to 1024px) */
 @media screen and (max-width: 1024px) {

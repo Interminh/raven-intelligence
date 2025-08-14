@@ -38,16 +38,14 @@
             <div class="close-btn" onclick="toggleSideMenu()">&times;</div>
         </div>
         <nav class="side-menu-nav">
-            <a href="#info" onclick="closeSideMenuAndScroll('info')">About Raven</a>
+            <a href="#info" onclick="closeSideMenuAndScroll('info')">About Us</a>
             <a href="#reveal" onclick="closeSideMenuAndScroll('reveal')">Features</a>
             <a href="#intro" onclick="closeSideMenuAndScroll('intro')">How It Works</a>
             <a href="#beginnings" onclick="closeSideMenuAndScroll('beginnings')">Our Story</a>
-            <a href="https://stats.sender.net/forms/ejRJNv/view" target="_blank">Join Waitlist</a>
-            <a href="#finale" onclick="closeSideMenuAndScroll('finale')">Contact</a>
+            <a href="https://stats.sender.net/forms/ejRJNv/view" target="_blank">Join the Waitlist</a>
         </nav>
     </div>
 
-    <!-- Overlay for side menu -->
     <div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
 
     <!-- The info part of the website-->
@@ -378,16 +376,16 @@ function toggleSideMenu() {
     if (sideMenu.classList.contains('open')) {
         sideMenu.classList.remove('open');
         overlay.classList.remove('active');
-        document.body.style.overflow = 'auto'; // Re-enable scrolling
+        document.body.style.overflow = 'auto'; 
     } else {
         sideMenu.classList.add('open');
         overlay.classList.add('active');
-        document.body.style.overflow = 'hidden'; // Disable scrolling
+        document.body.style.overflow = 'hidden'; 
     }
 }
 
 function closeSideMenuAndScroll(sectionId) {
-    // Close the side menu first
+
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('sideMenuOverlay');
     
@@ -395,7 +393,7 @@ function closeSideMenuAndScroll(sectionId) {
     overlay.classList.remove('active');
     document.body.style.overflow = 'auto';
     
-    // Then scroll to the section after a brief delay
+
     setTimeout(() => {
         scrollToSection(sectionId);
     }, 300);
