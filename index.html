@@ -264,8 +264,8 @@ function previousSlide(carouselName) {
     showSlide(carouselName, carousel.currentSlide);
 }
 
-
-setInterval(() => nextSlide('reveal'), 5000);
+// Stopped the automatic rotation for the reveal carousel
+// setInterval(() => nextSlide('reveal'), 5000);
 setInterval(() => nextSlide('beginnings'), 5000);
 
 // Track which boxes have been animated

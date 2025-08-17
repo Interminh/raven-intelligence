@@ -121,6 +121,12 @@ a {
     transition: all 0.1s ease;
 }
 
+/* Apply top margin to all .bottom button except in finale */
+.bottom button {
+    margin-top: 50px;
+}
+
+
 .header .arrow {
     display: flex;
     flex-direction: column;
@@ -490,12 +496,11 @@ a {
 }
 
 .beginnings .carousel-arrow.left {
-    left: 200px;         
+    display: none;         
 }
 
 .beginnings .carousel-arrow.right {
-    right: 200px;       
-
+    display: none;       
 }
 
 .start {
