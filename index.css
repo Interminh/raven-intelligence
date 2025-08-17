@@ -18,6 +18,37 @@ a {
     color: #FFFFFF;
 }
 
+/*Center Alignment*/
+.header, .info, .reveal, .intro, .beginnings, .finale {
+    text-align: center;
+}
+
+.top, .title, .meet1, .meet2, .interface .title, .interface .line, 
+.upper, .upper-2, .under, .line {
+    text-align: center;
+    margin-left: auto;
+    margin-right: auto;
+}
+.bottom, .button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.carousel-container, .mid-content {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.table {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.signature, .finisher {
+    text-align: right;
+}
+
 /* ---------------Header Style-----------------------------*/
 .header {
     display: flex;
