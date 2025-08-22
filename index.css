@@ -11,6 +11,9 @@ body {
     color: #FFFFFF;
     font-family: "Montserrat", sans-serif;
     user-select: none;
+    display: flex;
+    flex-direction: column;
+    gap: 5vh;
 }
 
 a {
@@ -21,6 +24,12 @@ a {
 /*Center Alignment*/
 .header, .info, .reveal, .intro, .beginnings, .finale {
     text-align: center;
+    min-height: 95vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    box-sizing: border-box;
+    /* overflow: hidden; */
 }
 
 .top, .title, .meet1, .meet2, .interface .title, .interface .line, 
@@ -51,17 +60,17 @@ a {
 
 /* ---------------Header Style-----------------------------*/
 .header {
-    display: flex;
-    flex-direction: column;
     /* background: linear-gradient(180deg, #000002 0%, #03061E 67%); */
-    gap: 250px; 
-    margin: 10px;
+    gap: 15vh; 
+    margin: 0;
+    padding: 20px;
+    justify-content: flex-start;
 }
 
 .logo img{
     width: 50px;
     height: auto;
-    margin-right: 50px;
+    margin: 10px;
 }
 
 .sign-up {
@@ -71,14 +80,19 @@ a {
 
 .mainbar {
     display: flex;
-    margin: 10px;
-    justify-content: space-between;
+    margin: 0;
+    justify-content: flex-start;
+    align-self: flex-start;
+    width: 100%;
 }
 
 .hook {
     display: flex;
     flex-direction: column;
     align-items: center;
+    flex: 1;
+    justify-content: center;
+    margin-top: -10vh;
 }
 
 .top {
