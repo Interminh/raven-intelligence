@@ -2,7 +2,7 @@
 
 ///Overall Design
 -   Center the website, all aspects of it
--Incoporate responsive design instead of static design and also let the font increase as well.
+-   Incoporate responsive design instead of static design and also let the font increase as well.
 -   Make all text on website non-selectable
 
 ///Sidebar
@@ -22,3 +22,5 @@
 
 ///Mobile
 -Fix arrows on reveal carousel
+-Fix horizontal scrolling
+-Increase text size when needed
