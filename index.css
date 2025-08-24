@@ -3,6 +3,13 @@ html {
     scroll-behavior: smooth;
 }
 
+/* Universal image scaling */
+img {
+    max-width: 100%;
+    height: auto;
+    object-fit: contain;
+}
+
 body {
     background: linear-gradient(180deg, #000002 0%, #03061E 12.5%, #404257 25%, #5B5C6C 37.5%, #404257 62.5%, #03061E 75%, #000002 87.5%);
     min-height: 100vh;
@@ -289,6 +296,65 @@ a {
     transform: translateY(-50%) scale(1.1);
 }
 
+/* Carousel dot indicators */
+.carousel-dots {
+    display: none; /* Hidden by default, shown when arrows are hidden */
+    justify-content: center;
+    gap: 10px;
+    margin-top: 20px;
+    position: relative;
+    z-index: 5;
+}
+
+.dot {
+    width: 12px;
+    height: 12px;
+    border-radius: 50%;
+    background: rgba(255, 255, 255, 0.3);
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.dot.active {
+    background: #FFFFFF;
+    transform: scale(1.3);
+}
+
+.dot:hover {
+    background: rgba(255, 255, 255, 0.6);
+    transform: scale(1.1);
+}
+
+/* Responsive carousel arrow behavior */
+@media screen and (max-width: 900px) {
+    .reveal .carousel-container {
+        position: relative;
+    }
+    
+    .reveal .carousel-arrow {
+        display: none;
+    }
+    
+    .reveal .carousel-dots {
+        display: flex;
+    }
+}
+
+/* Minimum space check for arrows */
+@media screen and (min-width: 901px) {
+    .reveal .carousel-container {
+        min-width: 600px; /* Minimum space needed for content + arrows */
+    }
+    
+    .reveal .carousel-arrow.left {
+        left: -80px; /* Safe distance from carousel content */
+    }
+    
+    .reveal .carousel-arrow.right {
+        right: -80px; /* Safe distance from carousel content */
+    }
+}
+
 
 
 .mid-content {
@@ -342,17 +408,17 @@ a {
     display: flex;
     align-items: center;
     justify-content: center;
-    width: 90%;
-    height: 75%;
-
+    width: 100%;
+    height: 100%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .photo img {
     width: 100%;
     height: 100%;
-    object-fit: cover;
+    object-fit: contain;
     border-radius: 81px;
-    border: 0.5px solid whitesmoke;
 }
 
 
@@ -532,8 +598,10 @@ a {
 }
 
 .beginnings .photo {
-    width: 50%;  
-    height: 75%; 
+    width: 60%;  
+    height: 85%;
+    max-width: 100%;
+    max-height: 100%;
 }
 .beginnings .text {
     font-size: 15px;     

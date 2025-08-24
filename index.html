@@ -61,7 +61,7 @@
             </div>
             <div class = "line">
                 <div>Intelligence isn't about looking things up.</div>
-                <div>It's about remebering what matters and understanding who you are.</div>
+                <div>It's about remembering what matters and understanding who you are.</div>
             </div>
         <div class = "bottom">
             <!-- <div class = "button"><button onclick="scrollToSection('reveal')">Experience Raven</button></div> -->
@@ -104,6 +104,14 @@
             </div>
             
             <div class="carousel-arrow right" onclick="nextSlide('reveal')">&#8250;</div>
+        </div>
+        
+        <!-- Dot indicators for reveal carousel -->
+        <div class="carousel-dots" data-carousel="reveal">
+            <div class="dot active" onclick="goToSlide('reveal', 0)"></div>
+            <div class="dot" onclick="goToSlide('reveal', 1)"></div>
+            <div class="dot" onclick="goToSlide('reveal', 2)"></div>
+            <div class="dot" onclick="goToSlide('reveal', 3)"></div>
         </div>
         <div class = "bottom">
             <!-- <div class = "button"><button onclick="scrollToSection('intro')">Discover the Difference</button></div> -->
@@ -242,8 +250,26 @@ function showSlide(carouselName, index) {
         document.querySelector(`.${slide}`).classList.remove('active');
     });
     
- 
     document.querySelector(`.${carousel.slides[index]}`).classList.add('active');
+    
+    // Update dot indicators
+    updateDotIndicators(carouselName, index);
+}
+
+function updateDotIndicators(carouselName, activeIndex) {
+    const dotsContainer = document.querySelector(`.carousel-dots[data-carousel="${carouselName}"]`);
+    if (dotsContainer) {
+        const dots = dotsContainer.querySelectorAll('.dot');
+        dots.forEach((dot, index) => {
+            dot.classList.toggle('active', index === activeIndex);
+        });
+    }
+}
+
+function goToSlide(carouselName, index) {
+    const carousel = carousels[carouselName];
+    carousel.currentSlide = index;
+    showSlide(carouselName, index);
 }
 
 function nextSlide(carouselName) {
@@ -261,6 +287,115 @@ function previousSlide(carouselName) {
 // Stopped the automatic rotation for the reveal carousel
 // setInterval(() => nextSlide('reveal'), 5000);
 setInterval(() => nextSlide('beginnings'), 5000);
+
+// Touch/Swipe functionality for carousels
+function initializeCarouselTouch() {
+    const carouselContainers = document.querySelectorAll('.carousel-container');
+    
+    carouselContainers.forEach(container => {
+        const carouselName = container.getAttribute('data-carousel');
+        let startX = 0;
+        let startY = 0;
+        let currentX = 0;
+        let currentY = 0;
+        let isDragging = false;
+        
+        // Touch events
+        container.addEventListener('touchstart', (e) => {
+            startX = e.touches[0].clientX;
+            startY = e.touches[0].clientY;
+            isDragging = true;
+        });
+        
+        container.addEventListener('touchmove', (e) => {
+            if (!isDragging) return;
+            currentX = e.touches[0].clientX;
+            currentY = e.touches[0].clientY;
+        });
+        
+        container.addEventListener('touchend', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const deltaX = startX - currentX;
+            const deltaY = startY - currentY;
+            
+            // Only handle horizontal swipes (ignore vertical)
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    nextSlide(carouselName); // Swipe left = next slide
+                } else {
+                    previousSlide(carouselName); // Swipe right = previous slide
+                }
+            }
+        });
+        
+        // Mouse events for desktop testing
+        container.addEventListener('mousedown', (e) => {
+            startX = e.clientX;
+            startY = e.clientY;
+            isDragging = true;
+            e.preventDefault();
+        });
+        
+        container.addEventListener('mousemove', (e) => {
+            if (!isDragging) return;
+            currentX = e.clientX;
+            currentY = e.clientY;
+        });
+        
+        container.addEventListener('mouseup', (e) => {
+            if (!isDragging) return;
+            isDragging = false;
+            
+            const deltaX = startX - currentX;
+            const deltaY = startY - currentY;
+            
+            if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
+                if (deltaX > 0) {
+                    nextSlide(carouselName);
+                } else {
+                    previousSlide(carouselName);
+                }
+            }
+        });
+    });
+}
+
+// Initialize touch functionality when page loads
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCarouselTouch();
+    checkCarouselSpace();
+    
+    // Check space on window resize
+    window.addEventListener('resize', checkCarouselSpace);
+});
+
+// Check if there's enough space for arrows and hide them if not
+function checkCarouselSpace() {
+    const revealContainer = document.querySelector('.reveal .carousel-container');
+    if (!revealContainer) return;
+    
+    const containerRect = revealContainer.getBoundingClientRect();
+    const containerWidth = containerRect.width;
+    const minRequiredWidth = 600; // Content + arrow space
+    
+    const leftArrow = revealContainer.querySelector('.carousel-arrow.left');
+    const rightArrow = revealContainer.querySelector('.carousel-arrow.right');
+    const dots = document.querySelector('.carousel-dots[data-carousel="reveal"]');
+    
+    if (containerWidth < minRequiredWidth || window.innerWidth <= 900) {
+        // Hide arrows, show dots
+        if (leftArrow) leftArrow.style.display = 'none';
+        if (rightArrow) rightArrow.style.display = 'none';
+        if (dots) dots.style.display = 'flex';
+    } else {
+        // Show arrows, hide dots
+        if (leftArrow) leftArrow.style.display = 'flex';
+        if (rightArrow) rightArrow.style.display = 'flex';
+        if (dots) dots.style.display = 'none';
+    }
+}
 
 // Track which boxes have been animated
 const animatedBoxes = new Set();
