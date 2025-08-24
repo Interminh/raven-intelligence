@@ -252,7 +252,7 @@ function showSlide(carouselName, index) {
     
     document.querySelector(`.${carousel.slides[index]}`).classList.add('active');
     
-    // Update dot indicators
+
     updateDotIndicators(carouselName, index);
 }
 
@@ -284,7 +284,7 @@ function previousSlide(carouselName) {
     showSlide(carouselName, carousel.currentSlide);
 }
 
-// Stopped the automatic rotation for the reveal carousel
+
 // setInterval(() => nextSlide('reveal'), 5000);
 setInterval(() => nextSlide('beginnings'), 5000);
 
@@ -300,7 +300,7 @@ function initializeCarouselTouch() {
         let currentY = 0;
         let isDragging = false;
         
-        // Touch events
+
         container.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
             startY = e.touches[0].clientY;
@@ -323,14 +323,14 @@ function initializeCarouselTouch() {
             // Only handle horizontal swipes (ignore vertical)
             if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > 50) {
                 if (deltaX > 0) {
-                    nextSlide(carouselName); // Swipe left = next slide
+                    nextSlide(carouselName); 
                 } else {
-                    previousSlide(carouselName); // Swipe right = previous slide
+                    previousSlide(carouselName); 
                 }
             }
         });
         
-        // Mouse events for desktop testing
+
         container.addEventListener('mousedown', (e) => {
             startX = e.clientX;
             startY = e.clientY;
@@ -362,23 +362,14 @@ function initializeCarouselTouch() {
     });
 }
 
-// Initialize touch functionality when page loads
-document.addEventListener('DOMContentLoaded', function() {
-    initializeCarouselTouch();
-    checkCarouselSpace();
-    
-    // Check space on window resize
-    window.addEventListener('resize', checkCarouselSpace);
-});
 
-// Check if there's enough space for arrows and hide them if not
 function checkCarouselSpace() {
     const revealContainer = document.querySelector('.reveal .carousel-container');
     if (!revealContainer) return;
     
     const containerRect = revealContainer.getBoundingClientRect();
     const containerWidth = containerRect.width;
-    const minRequiredWidth = 600; // Content + arrow space
+    const minRequiredWidth = 600; 
     
     const leftArrow = revealContainer.querySelector('.carousel-arrow.left');
     const rightArrow = revealContainer.querySelector('.carousel-arrow.right');
@@ -397,16 +388,16 @@ function checkCarouselSpace() {
     }
 }
 
-// Track which boxes have been animated
+
 const animatedBoxes = new Set();
 
-// Function to create fast typewriter effect that handles HTML
+// Typewriter effect in intro section
 function fastTypewriterEffect(element, htmlContent, speed = 15) {
     return new Promise((resolve) => {
         element.innerHTML = '';
         element.style.visibility = 'visible';
         
-        // Extract plain text content for typing
+
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = htmlContent;
         const plainText = tempDiv.textContent || tempDiv.innerText;
@@ -416,36 +407,36 @@ function fastTypewriterEffect(element, htmlContent, speed = 15) {
             if (i < plainText.length) {
                 const currentText = plainText.substring(0, i + 1);
                 
-                // Apply HTML formatting to the current text
+          
                 if (htmlContent.includes('<strong>')) {
-                    // Find the strong tag content
+              
                     const strongMatch = htmlContent.match(/<strong>(.*?)<\/strong>/);
                     if (strongMatch) {
                         const strongText = strongMatch[1];
                         if (currentText.length <= strongText.length) {
-                            // Still typing within the strong tag
+                       
                             element.innerHTML = `<strong>${currentText}</strong>`;
                         } else {
-                            // Finished strong tag, add remaining text
+      
                             const remainingText = currentText.substring(strongText.length);
                             element.innerHTML = `<strong>${strongText}</strong>${remainingText}`;
                         }
                     }
                 } else {
-                    // No special formatting, just add text
+ 
                     element.textContent = currentText;
                 }
                 i++;
             } else {
                 clearInterval(timer);
-                element.innerHTML = htmlContent; // Ensure final HTML is exactly right
+                element.innerHTML = htmlContent; 
                 resolve();
             }
         }, speed);
     });
 }
 
-// Function to toggle box expansion & typewriter effect
+//Box expansion function
 async function toggleBox(box) {
     const isExpanding = !box.classList.contains('expanded');
     const boxId = box.id;
@@ -483,7 +474,7 @@ async function toggleBox(box) {
     }
 }
 
-// Function to scroll to a section smoothly
+//Sidebar scroll to section
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -527,6 +518,81 @@ function closeSideMenuAndScroll(sectionId) {
         scrollToSection(sectionId);
     }, 300);
 }
+
+//Apple inspired website reveal
+class ScrollAnimations {
+    constructor() {
+        this.sections = document.querySelectorAll('.header, .info, .reveal, .intro, .beginnings, .finale');
+        this.animatedSections = new Set();
+        this.init();
+    }
+
+    init() {
+
+        this.sections.forEach((section, index) => {
+            if (index === 0) {
+                // Keep header visible
+                section.classList.add('scroll-visible');
+            } else {
+                // Hide other sections initially
+                section.classList.add('scroll-hidden');
+            }
+        });
+
+
+        this.observer = new IntersectionObserver(
+            (entries) => this.handleIntersection(entries),
+            {
+                threshold: 0.1, 
+                rootMargin: '-50px 0px -50px 0px' 
+            }
+        );
+
+        this.sections.forEach((section, index) => {
+            if (index > 0) {
+                this.observer.observe(section);
+            }
+        });
+    }
+
+    handleIntersection(entries) {
+        entries.forEach(entry => {
+            if (entry.isIntersecting) {
+                const section = entry.target;
+                const sectionId = section.id || section.className.split(' ')[0];
+                
+                // Only animate if not already animated
+                if (!this.animatedSections.has(sectionId)) {
+                    this.animateSection(section);
+                    this.animatedSections.add(sectionId);
+                }
+            }
+        });
+    }
+
+    animateSection(section) {
+  
+        section.classList.remove('scroll-hidden');
+        section.classList.add('scroll-visible');
+        
+
+        setTimeout(() => {
+            section.classList.add('scroll-animated');
+        }, 50);
+    }
+}
+
+
+document.addEventListener('DOMContentLoaded', function() {
+    initializeCarouselTouch();
+    checkCarouselSpace();
+    
+  
+    new ScrollAnimations();
+    
+ 
+    window.addEventListener('resize', checkCarouselSpace);
+});
 </script>
 
 </body>

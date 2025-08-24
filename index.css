@@ -29,6 +29,24 @@ a {
     color: #FFFFFF;
 }
 
+/* Apple inspired animations during scrolltime */
+.scroll-hidden {
+    opacity: 0;
+    transform: translateY(60px);
+    transition: none;
+}
+
+.scroll-visible {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+                transform 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.scroll-animated {
+    transition-duration: 0.8s;
+}
+
 /*Center Alignment*/
 .header, .info, .reveal, .intro, .beginnings, .finale {
     text-align: center;
@@ -174,7 +192,7 @@ a {
     transition: all 0.1s ease;
 }
 
-/* Apply top margin to all .bottom button except in finale */
+
 .bottom button {
     margin-top: 50px;
 }
@@ -296,9 +314,9 @@ a {
     transform: translateY(-50%) scale(1.1);
 }
 
-/* Carousel dot indicators */
+/* Carousel dot display */
 .carousel-dots {
-    display: none; /* Hidden by default, shown when arrows are hidden */
+    display: none; 
     justify-content: center;
     gap: 10px;
     margin-top: 20px;
@@ -325,7 +343,7 @@ a {
     transform: scale(1.1);
 }
 
-/* Responsive carousel arrow behavior */
+
 @media screen and (max-width: 900px) {
     .reveal .carousel-container {
         position: relative;
@@ -340,18 +358,18 @@ a {
     }
 }
 
-/* Minimum space check for arrows */
+
 @media screen and (min-width: 901px) {
     .reveal .carousel-container {
-        min-width: 600px; /* Minimum space needed for content + arrows */
+        min-width: 600px; 
     }
     
     .reveal .carousel-arrow.left {
-        left: -80px; /* Safe distance from carousel content */
+        left: -80px; 
     }
     
     .reveal .carousel-arrow.right {
-        right: -80px; /* Safe distance from carousel content */
+        right: -80px; 
     }
 }
 
