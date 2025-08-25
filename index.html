@@ -244,15 +244,43 @@ const carousels = {
 };
 
 function showSlide(carouselName, index) {
+    console.log('showSlide called:', carouselName, 'index:', index);
     const carousel = carousels[carouselName];
- 
-    carousel.slides.forEach(slide => {
-        document.querySelector(`.${slide}`).classList.remove('active');
+    if (!carousel || !carousel.slides) {
+        console.log('Carousel or slides not found');
+        return;
+    }
+    
+    // Ensure index is valid
+    if (index < 0) index = carousel.slides.length - 1;
+    if (index >= carousel.slides.length) index = 0;
+    
+    console.log('Final index after wrapping:', index);
+    console.log('Available slides:', carousel.slides);
+    
+    // Remove active class from all slides
+    carousel.slides.forEach(slideClass => {
+        const element = document.querySelector(`.${slideClass}`);
+        if (element) {
+            element.classList.remove('active');
+            console.log('Removed active from:', slideClass);
+        }
     });
     
-    document.querySelector(`.${carousel.slides[index]}`).classList.add('active');
+    // Add active class to current slide
+    const currentSlideElement = document.querySelector(`.${carousel.slides[index]}`);
+    if (currentSlideElement) {
+        currentSlideElement.classList.add('active');
+        console.log('Added active to:', carousel.slides[index]);
+    } else {
+        console.log('Could not find element for:', carousel.slides[index]);
+    }
     
-
+    // Update carousel state
+    carousel.currentSlide = index;
+    console.log('Updated currentSlide to:', index);
+    
+    // Update dot indicators
     updateDotIndicators(carouselName, index);
 }
 
@@ -261,27 +289,45 @@ function updateDotIndicators(carouselName, activeIndex) {
     if (dotsContainer) {
         const dots = dotsContainer.querySelectorAll('.dot');
         dots.forEach((dot, index) => {
-            dot.classList.toggle('active', index === activeIndex);
+            if (index === activeIndex) {
+                dot.classList.add('active');
+            } else {
+                dot.classList.remove('active');
+            }
         });
     }
 }
 
 function goToSlide(carouselName, index) {
-    const carousel = carousels[carouselName];
-    carousel.currentSlide = index;
     showSlide(carouselName, index);
 }
 
 function nextSlide(carouselName) {
+    console.log('nextSlide called for:', carouselName);
     const carousel = carousels[carouselName];
-    carousel.currentSlide = (carousel.currentSlide + 1) % carousel.slides.length;
-    showSlide(carouselName, carousel.currentSlide);
+    if (!carousel) {
+        console.log('Carousel not found:', carouselName);
+        return;
+    }
+    
+    console.log('Current slide before:', carousel.currentSlide);
+    const nextIndex = carousel.currentSlide + 1;
+    console.log('Next index will be:', nextIndex);
+    showSlide(carouselName, nextIndex);
 }
 
 function previousSlide(carouselName) {
+    console.log('previousSlide called for:', carouselName);
     const carousel = carousels[carouselName];
-    carousel.currentSlide = (carousel.currentSlide - 1 + carousel.slides.length) % carousel.slides.length;
-    showSlide(carouselName, carousel.currentSlide);
+    if (!carousel) {
+        console.log('Carousel not found:', carouselName);
+        return;
+    }
+    
+    console.log('Current slide before:', carousel.currentSlide);
+    const prevIndex = carousel.currentSlide - 1;
+    console.log('Previous index will be:', prevIndex);
+    showSlide(carouselName, prevIndex);
 }
 
 
@@ -332,6 +378,11 @@ function initializeCarouselTouch() {
         
 
         container.addEventListener('mousedown', (e) => {
+            // Don't interfere with arrow clicks
+            if (e.target.classList.contains('carousel-arrow')) {
+                return;
+            }
+            
             startX = e.clientX;
             startY = e.clientY;
             isDragging = true;
@@ -583,7 +634,16 @@ class ScrollAnimations {
 }
 
 
+// Initialize carousel on page load
+function initializeCarousel() {
+    // Make sure reveal carousel starts at slide 0
+    showSlide('reveal', 0);
+    // Make sure beginnings carousel starts at slide 0  
+    showSlide('beginnings', 0);
+}
+
 document.addEventListener('DOMContentLoaded', function() {
+    initializeCarousel();
     initializeCarouselTouch();
     checkCarouselSpace();
     
