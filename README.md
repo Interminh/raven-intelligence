@@ -1,6 +1,6 @@
 # Raven Intelligence
 
-A landing page concept for a AI hardware product, built to practice front-end design and animation. No frameworks, just HTML, CSS, and vanilla JS.
+A landing page concept for a AI hardware product, built to practice front-end design and animation. No frameworks, just HTML, CSS, and vanilla JS. Done with skills learned through The Odin Project (TOP).
 
 ## About
 
