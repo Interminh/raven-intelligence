@@ -11,21 +11,16 @@
 </head>
 
 <body>
-    <!-- The Header Section of the Website -->
+    <!-- Header -->
     <div class = "header">
         <div class = "mainbar">
             <div class = "logo" onclick="toggleSideMenu()"><img src = "./images/raven-logo.jpg" alt = "The premier logo of Raven Intelligence."></div>
-            <!-- Leads Patrons to the Email sign-up -->
-            <!-- <div class = "sign-up"><a href = "https://stats.sender.net/forms/ejRJNv/view">Sign Up</a></div> -->
         </div>
         <div class = "hook">
             <div class = "top">The Future of You.</div>
             <div class = "middle">Raven, the only assistant that knows you better than you know yourself.</div>
-            <!-- <div class = "bottom"><button onclick="scrollToSection('info')">Unlock Your Future</button></div> -->
             <div class = "arrow"><div></div><div></div></div>
         </div>
-
-    <!-- Section above should theoretically take up whole landing screen of whatever device -->
     </div>
 
     <!-- Side Menu -->
@@ -48,7 +43,7 @@
 
     <div class="side-menu-overlay" id="sideMenuOverlay" onclick="toggleSideMenu()"></div>
 
-    <!-- The info part of the website-->
+    <!-- Info section -->
      <div class = "info" id="info">
         <div class = "top">
             <div class = "title">The Next Leap Is You.</div>
@@ -64,11 +59,10 @@
                 <div>It's about remembering what matters and understanding who you are.</div>
             </div>
         <div class = "bottom">
-            <!-- <div class = "button"><button onclick="scrollToSection('reveal')">Experience Raven</button></div> -->
         </div>
      </div>
 
-     <!-- The reveal and product showcase part of the website -->
+     <!-- Reveal / product showcase carousel -->
      <div class = "reveal" id="reveal">
         <div class = "top">
             <div class = "title">The Future is in Sight.</div>
@@ -114,13 +108,10 @@
             <div class="dot" onclick="goToSlide('reveal', 3)"></div>
         </div>
         <div class = "bottom">
-            <!-- <div class = "button"><button onclick="scrollToSection('intro')">Discover the Difference</button></div> -->
         </div>
      </div>
 
-
-
-    <!-- The Introduction Section of the Website with aux info -->
+    <!-- Intro section -->
      <div class = "intro" id="intro">
         <div class = "meet">
             <div class = "meet1">The Core of Your Potential.</div>
@@ -160,11 +151,10 @@
         </div>
         <div class = "bottom">
             <div class = "text">Local by default. Private by design.</div>
-            <!-- <button onclick="scrollToSection('beginnings')">Beginnings</button> -->
         </div>
      </div>
 
-     <!-- The beginnings section -->
+     <!-- Beginnings section -->
       <div class = "beginnings" id="beginnings">
         <div class = "interface">
             <div class = "title">It all started with a question.</div>
@@ -211,7 +201,7 @@
 
       </div>
 
-      <!-- Finale Section of the Website -->
+      <!-- Finale section -->
        <div class = "finale" id = "finale">
             <div class = "look">
                 <div class = "upper">Ready to Look Within?</div>
@@ -245,43 +235,21 @@ const carousels = {
 };
 
 function showSlide(carouselName, index) {
-    console.log('showSlide called:', carouselName, 'index:', index);
     const carousel = carousels[carouselName];
-    if (!carousel || !carousel.slides) {
-        console.log('Carousel or slides not found');
-        return;
-    }
-    
-    // Ensure index is valid
+    if (!carousel || !carousel.slides) return;
+
     if (index < 0) index = carousel.slides.length - 1;
     if (index >= carousel.slides.length) index = 0;
-    
-    console.log('Final index after wrapping:', index);
-    console.log('Available slides:', carousel.slides);
-    
-    // Remove active class from all slides
+
     carousel.slides.forEach(slideClass => {
         const element = document.querySelector(`.${slideClass}`);
-        if (element) {
-            element.classList.remove('active');
-            console.log('Removed active from:', slideClass);
-        }
+        if (element) element.classList.remove('active');
     });
-    
-    // Add active class to current slide
+
     const currentSlideElement = document.querySelector(`.${carousel.slides[index]}`);
-    if (currentSlideElement) {
-        currentSlideElement.classList.add('active');
-        console.log('Added active to:', carousel.slides[index]);
-    } else {
-        console.log('Could not find element for:', carousel.slides[index]);
-    }
-    
-    // Update carousel state
+    if (currentSlideElement) currentSlideElement.classList.add('active');
+
     carousel.currentSlide = index;
-    console.log('Updated currentSlide to:', index);
-    
-    // Update dot indicators
     updateDotIndicators(carouselName, index);
 }
 
@@ -304,38 +272,20 @@ function goToSlide(carouselName, index) {
 }
 
 function nextSlide(carouselName) {
-    console.log('nextSlide called for:', carouselName);
     const carousel = carousels[carouselName];
-    if (!carousel) {
-        console.log('Carousel not found:', carouselName);
-        return;
-    }
-    
-    console.log('Current slide before:', carousel.currentSlide);
-    const nextIndex = carousel.currentSlide + 1;
-    console.log('Next index will be:', nextIndex);
-    showSlide(carouselName, nextIndex);
+    if (!carousel) return;
+    showSlide(carouselName, carousel.currentSlide + 1);
 }
 
 function previousSlide(carouselName) {
-    console.log('previousSlide called for:', carouselName);
     const carousel = carousels[carouselName];
-    if (!carousel) {
-        console.log('Carousel not found:', carouselName);
-        return;
-    }
-    
-    console.log('Current slide before:', carousel.currentSlide);
-    const prevIndex = carousel.currentSlide - 1;
-    console.log('Previous index will be:', prevIndex);
-    showSlide(carouselName, prevIndex);
+    if (!carousel) return;
+    showSlide(carouselName, carousel.currentSlide - 1);
 }
 
-
-// setInterval(() => nextSlide('reveal'), 5000);
 setInterval(() => nextSlide('beginnings'), 5000);
 
-// Touch/Swipe functionality for carousels
+// Swipe support for carousels
 function initializeCarouselTouch() {
     const carouselContainers = document.querySelectorAll('.carousel-container');
     
@@ -346,7 +296,6 @@ function initializeCarouselTouch() {
         let currentX = 0;
         let currentY = 0;
         let isDragging = false;
-        
 
         container.addEventListener('touchstart', (e) => {
             startX = e.touches[0].clientX;
@@ -376,10 +325,9 @@ function initializeCarouselTouch() {
                 }
             }
         });
-        
 
         container.addEventListener('mousedown', (e) => {
-            // Don't interfere with arrow clicks
+            // Ignore drags starting on the arrows
             if (e.target.classList.contains('carousel-arrow')) {
                 return;
             }
@@ -448,85 +396,72 @@ function fastTypewriterEffect(element, htmlContent, speed = 15) {
     return new Promise((resolve) => {
         element.innerHTML = '';
         element.style.visibility = 'visible';
-        
 
         const tempDiv = document.createElement('div');
         tempDiv.innerHTML = htmlContent;
         const plainText = tempDiv.textContent || tempDiv.innerText;
-        
+
         let i = 0;
         const timer = setInterval(() => {
             if (i < plainText.length) {
                 const currentText = plainText.substring(0, i + 1);
-                
-          
+
                 if (htmlContent.includes('<strong>')) {
-              
                     const strongMatch = htmlContent.match(/<strong>(.*?)<\/strong>/);
                     if (strongMatch) {
                         const strongText = strongMatch[1];
                         if (currentText.length <= strongText.length) {
-                       
                             element.innerHTML = `<strong>${currentText}</strong>`;
                         } else {
-      
                             const remainingText = currentText.substring(strongText.length);
                             element.innerHTML = `<strong>${strongText}</strong>${remainingText}`;
                         }
                     }
                 } else {
- 
                     element.textContent = currentText;
                 }
                 i++;
             } else {
                 clearInterval(timer);
-                element.innerHTML = htmlContent; 
+                element.innerHTML = htmlContent;
                 resolve();
             }
         }, speed);
     });
 }
 
-//Box expansion function
+// Expands an info box and types out its text
 async function toggleBox(box) {
     const isExpanding = !box.classList.contains('expanded');
     const boxId = box.id;
-    
+
     if (isExpanding && boxId && !animatedBoxes.has(boxId)) {
-      
         animatedBoxes.add(boxId);
-        
-      
+
         const textDivs = box.querySelectorAll('.text div');
         textDivs.forEach(div => {
             div.style.visibility = 'hidden';
         });
-        
-      
+
         box.classList.add('expanded');
-        
-        
+
         const originalTexts = Array.from(textDivs).map(div => div.innerHTML);
-        
-       
+
         await new Promise(resolve => setTimeout(resolve, 400));
-        
-        
+
         for (let i = 0; i < textDivs.length; i++) {
             const div = textDivs[i];
             await fastTypewriterEffect(div, originalTexts[i], 10);
             if (i < textDivs.length - 1) {
-                await new Promise(resolve => setTimeout(resolve, 100)); 
+                await new Promise(resolve => setTimeout(resolve, 100));
             }
         }
     } else {
-
         box.classList.toggle('expanded');
     }
 }
 
-//Sidebar scroll to section
+// Scroll to a section from the sidebar
 function scrollToSection(sectionId) {
     const element = document.getElementById(sectionId);
     if (element) {
@@ -557,21 +492,19 @@ function toggleSideMenu() {
 }
 
 function closeSideMenuAndScroll(sectionId) {
-
     const sideMenu = document.getElementById('sideMenu');
     const overlay = document.getElementById('sideMenuOverlay');
-    
+
     sideMenu.classList.remove('open');
     overlay.classList.remove('active');
     document.body.style.overflow = 'auto';
-    
 
     setTimeout(() => {
         scrollToSection(sectionId);
     }, 300);
 }
 
-//Apple inspired website reveal
+// Fades sections in as they scroll into view
 class ScrollAnimations {
     constructor() {
         this.sections = document.querySelectorAll('.header, .info, .reveal, .intro, .beginnings, .finale');
@@ -580,7 +513,6 @@ class ScrollAnimations {
     }
 
     init() {
-
         this.sections.forEach((section, index) => {
             if (index === 0) {
                 // Keep header visible
@@ -590,7 +522,6 @@ class ScrollAnimations {
                 section.classList.add('scroll-hidden');
             }
         });
-
 
         this.observer = new IntersectionObserver(
             (entries) => this.handleIntersection(entries),
@@ -623,10 +554,8 @@ class ScrollAnimations {
     }
 
     animateSection(section) {
-  
         section.classList.remove('scroll-hidden');
         section.classList.add('scroll-visible');
-        
 
         setTimeout(() => {
             section.classList.add('scroll-animated');
@@ -634,12 +563,8 @@ class ScrollAnimations {
     }
 }
 
-
-// Initialize carousel on page load
 function initializeCarousel() {
-    // Make sure reveal carousel starts at slide 0
     showSlide('reveal', 0);
-    // Make sure beginnings carousel starts at slide 0  
     showSlide('beginnings', 0);
 }
 
@@ -647,11 +572,7 @@ document.addEventListener('DOMContentLoaded', function() {
     initializeCarousel();
     initializeCarouselTouch();
     checkCarouselSpace();
-    
-  
     new ScrollAnimations();
-    
- 
     window.addEventListener('resize', checkCarouselSpace);
 });
 </script>
