@@ -1,10 +1,10 @@
 # Raven Intelligence
 
-A landing page concept for a fictional AI hardware product, built to practice front-end design and animation. No frameworks, just HTML, CSS, and vanilla JS.
+A landing page concept for a AI hardware product, built to practice front-end design and animation. No frameworks, just HTML, CSS, and vanilla JS.
 
 ## About
 
-Raven Intelligence is a design exercise, not a real company or product. The site is styled like a premium tech launch page (think Apple-style scroll reveals) to explore layout, motion, and typography choices in a polished, production-like setting.
+Raven Intelligence is a design exercise, built for my peers who had a vision for a hardware product. The site is styled like a premium tech launch page (think Apple-style scroll reveals) to explore layout, motion, and typography choices in a polished, production-like setting.
 
 ## Features
 
